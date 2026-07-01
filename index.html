@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Keys Handbook — Lime3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --sage-dark:  #2D5444;
+  --sage:       #4E7D68;
+  --sage-mid:   #8DBFA4;
+  --sage-light: #EBF5EF;
+  --sage-pale:  #F4FAF6;
+  --brass:      #C4955A;
+  --brass-light:#F5EBD9;
+  --coral:      #D95F3B;
+  --coral-pale: #FDF0EC;
+  --charcoal:   #242420;
+  --body:       #3A3A36;
+  --muted:      #7A7A75;
+  --line:       #C8DDD5;
+  --paper:      #FAFDF9;
+  --white:      #ffffff;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  color:var(--body);
+  font-size:16px;
+  line-height:1.6;
+}
+.serif{font-family:'DM Serif Display',serif;}
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
+.wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+
+/* ── NAV ─────────────────────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--sage-dark);
+  border-bottom:3px solid var(--brass);
+}
+.nav-inner{
+  max-width:820px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:54px;
+}
+.nav-logo{
+  font-size:14px;font-weight:700;letter-spacing:.04em;
+  color:var(--white);text-decoration:none;
+}
+.nav-logo span{color:var(--brass);}
+.nav-cta{
+  font-size:13px;font-weight:700;
+  color:var(--sage-dark);background:var(--brass);
+  padding:8px 16px;border-radius:3px;
+  text-decoration:none;transition:opacity .15s;
+}
+.nav-cta:hover{opacity:.88;}
+
+/* ── HERO ────────────────────────────────────────────────── */
+.hero{
+  background:var(--sage-dark);
+  padding:72px 24px 88px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 1px,transparent 1px,transparent 44px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 1px,transparent 1px,transparent 44px);
+  pointer-events:none;
+}
+.hero-inner{max-width:820px;margin:0 auto;position:relative;}
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brass);display:inline-block;margin-bottom:18px;
+}
+.hero h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(34px,5.5vw,56px);line-height:1.08;
+  color:var(--white);margin-bottom:18px;
+}
+.hero h1 em{color:var(--brass);font-style:italic;}
+.hero-lede{font-size:16px;color:rgba(255,255,255,.7);max-width:480px;margin-bottom:32px;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.btn{
+  font-size:14px;font-weight:700;
+  padding:13px 22px;border-radius:3px;border:none;cursor:pointer;
+  text-decoration:none;display:inline-block;transition:transform .15s,opacity .15s;
+}
+.btn:hover{transform:translateY(-1px);opacity:.92;}
+.btn-primary{background:var(--coral);color:var(--white);}
+.btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.3);}
+.btn-ghost:hover{border-color:var(--brass);color:var(--brass);}
+
+/* ── SECTION ─────────────────────────────────────────────── */
+section{padding:60px 0;border-bottom:1px solid var(--line);}
+section:last-of-type{border-bottom:none;}
+.sec-label{
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brass);margin-bottom:8px;
+}
+.sec-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(24px,3.8vw,32px);line-height:1.12;
+  color:var(--sage-dark);margin-bottom:6px;
+}
+.sec-rule{width:44px;height:3px;background:var(--sage-mid);margin-bottom:28px;border-radius:2px;}
+.sec-desc{font-size:15px;color:var(--muted);margin-bottom:28px;max-width:580px;}
+
+/* ── SUBSECTION HEADING ──────────────────────────────────── */
+.sub-h{
+  font-size:14px;font-weight:700;color:var(--sage);
+  margin-bottom:10px;margin-top:32px;
+  display:flex;align-items:center;gap:8px;
+}
+.sub-h::after{content:'';flex:1;height:1px;background:var(--line);}
+
+/* ── TABLES ──────────────────────────────────────────────── */
+.tbl-wrap{overflow-x:auto;margin-bottom:8px;}
+table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.45;}
+thead th{
+  background:var(--sage);color:var(--white);
+  text-align:left;font-weight:600;font-size:12.5px;
+  padding:10px 13px;letter-spacing:.03em;
+}
+tbody tr:nth-child(even){background:var(--sage-light);}
+tbody tr:nth-child(odd){background:var(--white);}
+tbody td{padding:10px 13px;vertical-align:top;border-bottom:1px solid var(--line);}
+tbody td:first-child{font-weight:500;color:var(--charcoal);}
+.val{font-family:monospace;font-size:13px;color:var(--sage);font-weight:600;letter-spacing:.02em;}
+.impact{font-family:monospace;font-size:12.5px;color:var(--coral);font-weight:600;}
+.tag{
+  display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;padding:2px 7px;border-radius:10px;
+  background:var(--brass-light);color:var(--brass);margin-left:4px;
+  vertical-align:middle;
+}
+
+/* ── DO / DON'T ──────────────────────────────────────────── */
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+@media(max-width:560px){.do-dont{grid-template-columns:1fr;}}
+.do-col{border:1px solid var(--sage-mid);border-radius:4px;overflow:hidden;}
+.dont-col{border:1px solid var(--coral);border-radius:4px;overflow:hidden;}
+.col-head{padding:9px 14px;font-size:11.5px;font-weight:700;letter-spacing:.1em;}
+.do-col .col-head{background:var(--sage);color:var(--white);}
+.dont-col .col-head{background:var(--coral);color:var(--white);}
+.col-items{list-style:none;}
+.col-items li{
+  padding:8px 14px;font-size:14px;line-height:1.45;
+  border-top:1px solid var(--line);
+  display:flex;gap:8px;align-items:flex-start;
+}
+.do-col .col-items{background:var(--sage-pale);}
+.dont-col .col-items{background:var(--coral-pale);}
+.sym{flex-shrink:0;font-weight:700;margin-top:1px;}
+.do-col .sym{color:var(--sage);}
+.dont-col .sym{color:var(--coral);}
+
+/* ── BOXES ───────────────────────────────────────────────── */
+.info-box,.warn-box,.note-box,.brass-box{
+  padding:18px 20px;border-radius:4px;margin-bottom:20px;
+}
+.info-box{background:var(--sage-light);border-left:4px solid var(--sage-mid);}
+.warn-box{background:var(--coral-pale);border-left:4px solid var(--coral);}
+.note-box{background:var(--brass-light);border-left:4px solid var(--brass);}
+.brass-box{background:var(--sage-dark);color:var(--white);border-radius:6px;}
+.box-title{font-size:14px;font-weight:700;margin-bottom:10px;}
+.info-box .box-title{color:var(--sage);}
+.warn-box .box-title{color:var(--coral);}
+.note-box .box-title{color:var(--brass);}
+.brass-box .box-title{color:var(--brass);}
+.box-items{list-style:none;}
+.box-items li{font-size:14px;line-height:1.55;padding:3px 0;display:flex;gap:8px;}
+.box-items li::before{content:'·';font-weight:700;flex-shrink:0;margin-top:1px;}
+.info-box .box-items li::before{color:var(--sage-mid);}
+.warn-box .box-items li::before{color:var(--coral);}
+.note-box .box-items li::before{color:var(--brass);}
+.brass-box .box-items li{color:rgba(255,255,255,.85);}
+.brass-box .box-items li::before{color:var(--brass);}
+
+/* ── PHASE LIST ──────────────────────────────────────────── */
+.phases{list-style:none;}
+.phase-item{
+  display:grid;grid-template-columns:30px 1fr;gap:0 16px;
+  padding:16px 0;border-bottom:1px dashed var(--line);align-items:start;
+}
+.phase-num{
+  font-size:13px;font-weight:700;color:var(--brass);
+  padding-top:3px;font-family:monospace;
+}
+.phase-name{font-size:15px;font-weight:700;color:var(--charcoal);margin-bottom:4px;}
+.phase-desc{font-size:14px;color:var(--body);line-height:1.55;}
+.phase-note{
+  font-size:12.5px;color:var(--sage);margin-top:5px;
+  padding:5px 10px;background:var(--sage-light);border-radius:3px;
+  display:inline-block;
+}
+
+/* ── GOLDEN RULE ─────────────────────────────────────────── */
+.golden{
+  background:var(--sage-dark);color:var(--white);
+  padding:22px 24px;border-radius:6px;margin-bottom:24px;
+}
+.golden .rule-label{
+  font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brass);margin-bottom:10px;
+}
+.golden p{font-size:14.5px;line-height:1.65;color:rgba(255,255,255,.88);}
+.golden p+p{margin-top:8px;}
+
+/* ── PAYMENT MILESTONES ───────────────────────────────────── */
+.milestones{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+@media(max-width:560px){.milestones{grid-template-columns:1fr 1fr;}}
+.milestone-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:4px;padding:14px;text-align:center;
+}
+.m-pct{font-size:24px;font-weight:700;color:var(--sage);font-family:'DM Serif Display',serif;}
+.m-label{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.35;}
+
+/* ── TV GUIDE ────────────────────────────────────────────── */
+.tv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+@media(max-width:560px){.tv-grid{grid-template-columns:1fr 1fr;}}
+.tv-card{
+  background:var(--sage-light);border:1px solid var(--line);
+  border-radius:4px;padding:14px 10px;text-align:center;
+}
+.tv-size{font-size:22px;font-weight:700;color:var(--sage-dark);font-family:'DM Serif Display',serif;}
+.tv-dist{font-size:12px;color:var(--muted);margin-top:4px;}
+.tv-dist strong{color:var(--sage);font-size:13px;display:block;}
+
+/* ── CONSULT ─────────────────────────────────────────────── */
+.consult{
+  background:var(--sage-dark);padding:52px 32px;border-radius:6px;margin-top:60px;
+  position:relative;overflow:hidden;
+}
+.consult::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 1px,transparent 1px,transparent 44px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 1px,transparent 1px,transparent 44px);
+  pointer-events:none;
+}
+.consult-inner{position:relative;display:grid;grid-template-columns:1fr 160px;gap:36px;align-items:center;}
+@media(max-width:560px){.consult-inner{grid-template-columns:1fr;}}
+.consult h3{font-family:'DM Serif Display',serif;font-size:28px;color:var(--white);margin-bottom:12px;}
+.consult p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.65;margin-bottom:20px;}
+.consult-badge{
+  background:rgba(255,255,255,.08);border:1.5px solid var(--brass);
+  border-radius:6px;padding:20px 14px;text-align:center;
+}
+.badge-big{font-family:'DM Serif Display',serif;font-size:38px;color:var(--brass);display:block;line-height:1;}
+.badge-sub{font-size:12px;color:rgba(255,255,255,.6);margin-top:6px;display:block;}
+
+/* ── WARRANTY STRIP ──────────────────────────────────────── */
+.warranty-strip{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;
+}
+@media(max-width:560px){.warranty-strip{grid-template-columns:1fr;}}
+.w-card{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);
+  border-radius:4px;padding:14px;
+}
+.w-card .w-num{font-size:22px;font-weight:700;color:var(--brass);font-family:'DM Serif Display',serif;}
+.w-card p{font-size:13px;color:rgba(255,255,255,.65);margin-top:3px;}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer{
+  background:var(--sage-dark);border-top:3px solid var(--brass);
+  padding:30px 24px;text-align:center;
+}
+.footer-logo{font-size:14px;font-weight:700;color:var(--white);letter-spacing:.04em;margin-bottom:6px;}
+.footer-logo span{color:var(--brass);}
+footer p{font-size:13px;color:rgba(255,255,255,.45);}
+
+/* ── UTILS ───────────────────────────────────────────────── */
+.mt-4{margin-top:4px;}.mt-8{margin-top:8px;}.mt-16{margin-top:16px;}.mt-24{margin-top:24px;}
+.mb-8{margin-bottom:8px;}.mb-16{margin-bottom:16px;}.mb-24{margin-bottom:24px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:560px){.two-col{grid-template-columns:1fr;}}
+.text-muted{font-size:13px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">The Keys Handbook <span>· Lime3</span></a>
+    <a href="#consult" class="nav-cta">Free walkthrough with Kens →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">For Every Homeowner in Singapore</div>
+    <h1>Renovating soon?<br><em>Know what to expect.</em></h1>
+    <p class="hero-lede">A free, practical guide — from planning your home layout to moving in. Written from the ID's perspective, so nothing surprises you.</p>
+    <div class="hero-actions">
+      <a href="#s01" class="btn btn-primary">Start reading</a>
+      <a href="#consult" class="btn btn-ghost">Free 45-min walkthrough</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ S01 BEFORE YOUR KEYS ══════════════════════════════ -->
+<section id="s01">
+  <div class="sec-label">01</div>
+  <h2 class="sec-title serif">Before Your Keys</h2>
+  <div class="sec-rule"></div>
+  <p class="sec-desc">The earlier you start planning, the fewer surprises you'll have. Most homeowners who struggle with renovation started too late — not because they didn't have time, but because they didn't know what to decide and when.</p>
+
+  <div class="sub-h">Understanding your home &amp; lifestyle</div>
+  <p class="mb-16" style="font-size:14px;color:var(--body);">Before talking to any ID, spend time answering these for yourself. Your answers directly shape your layout, storage, and budget priorities.</p>
+
+  <div class="two-col mb-24">
+    <div class="info-box" style="margin-bottom:0">
+      <div class="box-title">Who is living here?</div>
+      <ul class="box-items">
+        <li>How many people — and their ages</li>
+        <li>Couple only, or with children / parents?</li>
+        <li>Is there a plan to have children in the next 3–5 years?</li>
+        <li>Will elderly parents ever move in?</li>
+        <li>Any pets, or plan to get one?</li>
+      </ul>
+    </div>
+    <div class="info-box" style="margin-bottom:0">
+      <div class="box-title">How do you live day-to-day?</div>
+      <ul class="box-items">
+        <li>Do you work from home? How often?</li>
+        <li>Do you cook frequently, or mainly for weekend meals?</li>
+        <li>Do you entertain guests at home?</li>
+        <li>Any hobbies that need dedicated space? (Music, art, fitness)</li>
+        <li>Night owl or early riser? (Affects lighting and soundproofing)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub-h">Room-by-room planning</div>
+  <div class="tbl-wrap mb-24">
+    <table>
+      <thead><tr><th>Room</th><th>Decide this early</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Master bedroom</td>
+          <td>Bed size, wardrobe side, TV or no TV, study nook?</td>
+          <td>Bed size determines wardrobe width. TV point and fan point must be planned before electrical works.</td>
+        </tr>
+        <tr>
+          <td>Bedroom 2 / 3</td>
+          <td>Purpose: guest room, study, nursery, or shared kids room?</td>
+          <td>Different purposes need different electrical points, storage types, and floor clearances.</td>
+        </tr>
+        <tr>
+          <td>Living room</td>
+          <td>TV size and wall, sofa layout, dining size, display storage?</td>
+          <td>TV size sets the sofa distance. Dining size sets the space left for living. Decide before carpentry is drawn.</td>
+        </tr>
+        <tr>
+          <td>Kitchen</td>
+          <td>Cooking style, appliances needed, open or closed kitchen?</td>
+          <td>Heavy cooking needs better ventilation. Appliance list affects countertop cutouts and plumbing points.</td>
+        </tr>
+        <tr>
+          <td>Bathrooms</td>
+          <td>Rain shower, handheld, or both? Bathtub? Instant or storage heater?</td>
+          <td>Shower type affects plumbing layout. Bathtub needs floor-load check and extra waterproofing scope.</td>
+        </tr>
+        <tr>
+          <td>Yard / utility</td>
+          <td>Washer only, or washer + dryer? Yard washing area?</td>
+          <td>Dryer type (vented vs condenser) affects wall penetration. Points must be planned before tiling.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-h">Needs vs wants — be honest about both</div>
+  <div class="do-dont">
+    <div class="do-col">
+      <div class="col-head">NEEDS — must have</div>
+      <ul class="col-items">
+        <li><span class="sym">✓</span>Enough storage for your actual belongings — measure and count before planning</li>
+        <li><span class="sym">✓</span>The right number of beds for who is sleeping here</li>
+        <li><span class="sym">✓</span>Functional kitchen for how you actually cook</li>
+        <li><span class="sym">✓</span>Sufficient bathroom count for the household routine</li>
+        <li><span class="sym">✓</span>Adequate electrical points where you actually use devices</li>
+      </ul>
+    </div>
+    <div class="dont-col">
+      <div class="col-head">WANTS — be selective</div>
+      <ul class="col-items">
+        <li><span class="sym">·</span>Feature walls and display cabinets — beautiful but consume budget fast</li>
+        <li><span class="sym">·</span>Island / breakfast bar — measure if you have the space first</li>
+        <li><span class="sym">·</span>Full false ceiling throughout — not all rooms benefit equally</li>
+        <li><span class="sym">·</span>Large-format tiles — higher cost and more waste than standard sizes</li>
+        <li><span class="sym">·</span>Rain shower — check if your water pressure supports it</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub-h">Budget anchors</div>
+  <div class="tbl-wrap mb-16">
+    <table>
+      <thead><tr><th>Flat type</th><th>Typical range</th><th>What this generally covers</th></tr></thead>
+      <tbody>
+        <tr><td>HDB BTO 3-room</td><td><span class="val">$30k – $55k</span></td><td>Hacking, tiling, basic carpentry, painting, plumbing</td></tr>
+        <tr><td>HDB BTO 4–5 room</td><td><span class="val">$55k – $100k</span></td><td>Full carpentry, tile selection, windows, glass works</td></tr>
+        <tr><td>HDB Resale</td><td><span class="val">$65k – $150k+</span></td><td>Adds hacking of existing finishes, re-tiling, plumbing amendments</td></tr>
+        <tr><td>Condo</td><td><span class="val">$80k – $200k+</span></td><td>MCST approval scope, premium materials, larger units</td></tr>
+        <tr><td>Contingency buffer</td><td><span class="val">+15 – 20%</span></td><td>Always set aside on top of your quoted amount</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-muted mb-16">Note: Electrical works and light fittings are typically not included in standard renovation quotes — always ask your ID to confirm what is and isn't covered before signing.</p>
+
+  <div class="sub-h">Shortlisting your ID or contractor</div>
+  <div class="do-dont">
+    <div class="do-col">
+      <div class="col-head">DO</div>
+      <ul class="col-items">
+        <li><span class="sym">✓</span>Request itemised quotes, not lump sums — compare scope line by line</li>
+        <li><span class="sym">✓</span>Check 3–5 IDs before deciding</li>
+        <li><span class="sym">✓</span>Ask who handles permit submissions and their typical timeline</li>
+        <li><span class="sym">✓</span>Visit a completed or ongoing project in person</li>
+        <li><span class="sym">✓</span>Get everything in writing — verbal agreements are not binding</li>
+      </ul>
+    </div>
+    <div class="dont-col">
+      <div class="col-head">DON'T</div>
+      <ul class="col-items">
+        <li><span class="sym">✕</span>Sign because the quote is cheapest — scope may be less</li>
+        <li><span class="sym">✕</span>Pay more than 10% deposit before work begins</li>
+        <li><span class="sym">✕</span>Rely on what was said verbally — it will not hold up if disputed</li>
+        <li><span class="sym">✕</span>Rush the shortlisting just because keys are coming soon</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S02 KEY COLLECTION DAY ═══════════════════════════ -->
+<section id="s02">
+  <div class="sec-label">02</div>
+  <h2 class="sec-title serif">Key Collection Day</h2>
+  <div class="sec-rule"></div>
+  <p class="sec-desc">Your first visit to the flat is the most important documentation moment. What you do here directly affects your renovation cost estimate.</p>
+
+  <div class="tbl-wrap mb-20">
+    <table>
+      <thead><tr><th></th><th>BTO</th><th>Resale</th></tr></thead>
+      <tbody>
+        <tr><td>Defect cover</td><td>1-year Defects Liability Period — report all issues via HDB portal immediately</td><td>None — all rectification is part of your renovation cost</td></tr>
+        <tr><td>What to document</td><td>HDB defect report form + full photo record</td><td>Full photo survey of every wall, floor, ceiling, wet area</td></tr>
+        <tr><td>Priority checks</td><td>Cracks, hollow tiles, leaks, electrical points, window alignment</td><td>Pipe condition, tile layers visible at corners, DB box age, damp patches</td></tr>
+        <tr><td>Bring along</td><td>Measuring tape, phone (fully charged)</td><td>Your ID if possible — they assess hacking and plumbing scope from what they see</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn-box">
+    <div class="box-title">Resale owners — do this before anything else</div>
+    <ul class="box-items">
+      <li>Photograph every room, every wall, all floor tiles, wet areas, and the DB box</li>
+      <li>Your ID uses these photos to price hacking scope — without them, any quote is an estimate</li>
+      <li>Look for signs of past renovation works: walls that don't match HDB floor plan, older tile layers visible at edges, patched plaster</li>
+      <li>Flats built before 2002 commonly have exposed water pipes — check if these are in the scope to amend</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ S03 RENOVATION PHASES ═══════════════════════════ -->
+<section id="s03">
+  <div class="sec-label">03</div>
+  <h2 class="sec-title serif">Renovation Phases</h2>
+  <div class="sec-rule"></div>
+  <p class="sec-desc">Renovation runs in a fixed sequence. Each phase depends on the previous one being done. Decisions made after a phase starts always cost more to change.</p>
+
+  <ul class="phases">
+    <li class="phase-item">
+      <span class="phase-num">01</span>
+      <div>
+        <div class="phase-name">Hacking &amp; Demolition</div>
+        <div class="phase-desc">Existing floor and wall finishes, built-ins, and structures to be removed are hacked out. This is when structural surprises in resale units surface — your ID should do a site visit during or right after this phase.</div>
+        <span class="phase-note">Good time to visit: confirm what you see matches what was quoted</span>
+      </div>
+    </li>
+    <li class="phase-item">
+      <span class="phase-num">02</span>
+      <div>
+        <div class="phase-name">Masonry</div>
+        <div class="phase-desc">New brick or block walls are built, wet areas are waterproofed (mandatory in all hacked wet zones), floors are screeded to level, and tiles are laid. All wet area positions must be confirmed before this phase — plumbing points are set here.</div>
+        <span class="phase-note">Confirm all wet area layouts before masonry begins — changes here affect plumbing</span>
+      </div>
+    </li>
+    <li class="phase-item">
+      <span class="phase-num">03</span>
+      <div>
+        <div class="phase-name">Plumbing</div>
+        <div class="phase-desc">Water supply and waste pipes are run to all wet areas. There are two approaches: <strong>concealed works</strong> (pipes hidden within walls and floors — cleaner finish, more work involved) or <strong>exposed works</strong> (pipes run on surface — more accessible for future servicing). Your ID will advise based on your flat's existing condition and design direction.</div>
+        <span class="phase-note">Pre-2002 flats: original exposed pipes are common — discuss with your ID whether to conceal or retain</span>
+      </div>
+    </li>
+    <li class="phase-item">
+      <span class="phase-num">04</span>
+      <div>
+        <div class="phase-name">Electrical Works</div>
+        <div class="phase-desc">Wiring, conduits, and the DB box are upgraded or amended. Like plumbing, this can be done as <strong>concealed works</strong> (wiring run inside walls and ceiling — requires hacking and plastering) or <strong>exposed works</strong> (surface trunking — faster, more accessible). Confirm every socket, switch, and light point position before walls are plastered over.</div>
+        <span class="phase-note">Lock in all socket and switch positions now — relocating them after plastering is additional cost</span>
+      </div>
+    </li>
+    <li class="phase-item">
+      <span class="phase-num">05</span>
+      <div>
+        <div class="phase-name">False Ceiling &amp; Dry Works</div>
+        <div class="phase-desc">Plasterboard ceilings, partition walls, and any dry-wall structures are constructed. Confirm all light positions, aircon trunking routes, and speaker or cabling runs before the ceiling closes up. Note that false ceiling reduces room height — check your existing ceiling height before committing.</div>
+      </div>
+    </li>
+    <li class="phase-item">
+      <span class="phase-num">06</span>
+      <div>
+        <div class="phase-name">Painting</div>
+        <div class="phase-desc">Walls and ceilings are painted — typically two to three coats. Painting is done before carpentry is installed so that walls are complete before built-ins go in. If you want smooth walls in addition to standard paint, discuss <strong>plastering or skimming</strong> with your ID early — walls are not automatically smooth, especially in resale units.</div>
+        <span class="phase-note">Smooth walls require additional skimming works — this is not included by default, voice it up early</span>
+      </div>
+    </li>
+    <li class="phase-item">
+      <span class="phase-num">07</span>
+      <div>
+        <div class="phase-name">Carpentry</div>
+        <div class="phase-desc">From measurement to discussion to fabrication to delivery to installation, carpentry typically takes 3–4 weeks depending on the amount of work. Drawings and material selections must be confirmed before fabrication begins. Changes after fabrication has started are costly and may not be possible — miscommunication at this stage is the most common source of disputes.</div>
+        <span class="phase-note">Review all carpentry drawings carefully before sign-off — confirm materials, dimensions, and internal layout</span>
+      </div>
+    </li>
+    <li class="phase-item">
+      <span class="phase-num">08</span>
+      <div>
+        <div class="phase-name">Final Fixes &amp; Handover</div>
+        <div class="phase-desc">Lights, fans, accessories, silicon sealing, and touch-ups are completed. A joint walkthrough with your ID is done — any items to be attended to are listed and an agreed timeline for completion is set. The final 5% payment is released at this stage upon sign-off. Prompt sign-off after items are rectified closes the project cleanly for both you and your ID.</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="mt-24">
+    <div class="sub-h">Typical payment milestones</div>
+    <p class="mb-16 text-muted">Standard milestone structure used in most renovation contracts in Singapore:</p>
+    <div class="milestones">
+      <div class="milestone-card">
+        <div class="m-pct serif">10%</div>
+        <div class="m-label">Deposit on signing of contract</div>
+      </div>
+      <div class="milestone-card">
+        <div class="m-pct serif">40%</div>
+        <div class="m-label">On commencement of works</div>
+      </div>
+      <div class="milestone-card">
+        <div class="m-pct serif">45%</div>
+        <div class="m-label">On completion of wet works &amp; carpentry confirmation</div>
+      </div>
+      <div class="milestone-card">
+        <div class="m-pct serif">5%</div>
+        <div class="m-label">On handover of completed unit</div>
+      </div>
+    </div>
+    <p class="text-muted">Renovation works typically run 8–12 weeks, excluding weekends, public holidays, and the first 15 days of Chinese New Year. Timelines may extend due to variation orders, authority approvals, or material delays — these are outside the ID's control.</p>
+  </div>
+</section>
+
+<!-- ═══ S04 MISCONCEPTIONS ════════════════════════════════ -->
+<section id="s04">
+  <div class="sec-label">04</div>
+  <h2 class="sec-title serif">What to Expect — &amp; What's Normal</h2>
+  <div class="sec-rule"></div>
+  <p class="sec-desc">These are the observations homeowners most commonly raise during and after renovation. Knowing what's industry-normal versus what's a genuine defect prevents unnecessary friction — and helps you focus on what actually matters.</p>
+
+  <div class="sub-h">What looks like a problem — but is normal</div>
+  <div class="tbl-wrap mb-16">
+    <table>
+      <thead><tr><th>What you notice</th><th>The reality</th><th>When to raise it</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Tile colour looks inconsistent across the floor</td>
+          <td>Tiles from the same batch can vary slightly in shade due to kiln temperature variations during manufacturing. This is especially noticeable in large, uniform tiles under raking light.</td>
+          <td>If patches are visibly different at normal standing distance under room lighting — raise it. If it's only visible when comparing tiles side by side — it's within normal range.</td>
+        </tr>
+        <tr>
+          <td>Grout colour is uneven or looks patchy after drying</td>
+          <td>Grout changes colour as it cures, and dries at different rates depending on ambient humidity. Grout from different bags can also vary slightly in shade.</td>
+          <td>Judge after grout is fully cured (48–72 hours). Persistent patchiness after curing can be flagged.</td>
+        </tr>
+        <tr>
+          <td>Walls feel slightly bumpy or uneven to the touch</td>
+          <td>Standard plaster has a tolerance of ±3mm over 2 metres. Walls are not automatically smooth — smooth walls require additional skimming works, which must be specifically requested and quoted.</td>
+          <td>Raise this <em>before</em> painting starts if smoothness matters to you. After painting, skim-coat touch-ups are much harder to execute cleanly.</td>
+        </tr>
+        <tr>
+          <td>Paint has slight roller texture, especially in raking light</td>
+          <td>Latex paint applied by roller leaves a slight texture — this is normal. It becomes more visible when light hits at an angle. The same walls look perfectly smooth under normal overhead lighting.</td>
+          <td>Judge walls standing at 1.5m under normal room lighting — not with a torch at an angle. Final coat quality is what counts, not the first or second coat.</td>
+        </tr>
+        <tr>
+          <td>Small gap between top of carpentry and ceiling</td>
+          <td>Plywood and board expand and contract with humidity. A small gap is expected and is sealed with silicon. The silicon line is the intended finish — it is not a shortcut.</td>
+          <td>Silicon that is pulling away, mouldy, or missing entirely is a defect. A silicon line that is slightly wavy is normal.</td>
+        </tr>
+        <tr>
+          <td>Some tiles sound hollow when tapped</td>
+          <td>Up to 20% hollow area is the accepted industry standard for wall tiles. Some hollow sound does not mean the tile will fail.</td>
+          <td>Floor tiles should be fully bonded — hollow floor tiles can crack underfoot and should be flagged. Wall tiles with more than 20% hollow area can also be raised.</td>
+        </tr>
+        <tr>
+          <td>Paint colour on wall looks darker or different from the sample card</td>
+          <td>Colour cards are viewed in neutral light. Your room's lighting type, ceiling height, and adjacent wall colours all affect how a paint colour reads. This is perception, not a paint defect.</td>
+          <td>Always test a sample pot on your actual wall before sign-off on colour selection. Request this before painting begins.</td>
+        </tr>
+        <tr>
+          <td>Wardrobe doors are slightly misaligned after a few weeks</td>
+          <td>Hinges and tracks adjust to humidity and the weight of doors over the first weeks. Minor misalignment early on is expected.</td>
+          <td>Request one adjustment visit — this is standard within the warranty period. If doors still don't close flush after adjustment, raise it as a defect.</td>
+        </tr>
+        <tr>
+          <td>Marble, granite, or timber veneer looks different from the showroom sample</td>
+          <td>Natural materials are quarried or cut from nature — each slab or piece has unique grain, veining, and colour variation. No two pieces are identical. Shade and pattern will differ from catalogue images.</td>
+          <td>View your actual slab or sample before installation is confirmed. Once installed, natural variation is not grounds for replacement.</td>
+        </tr>
+        <tr>
+          <td>Measurements of built-ins differ slightly from drawings</td>
+          <td>Carpentry drawings are produced before site conditions are fully known. Final measurements are taken on site, and minor dimensional differences from drawings are a normal part of the process.</td>
+          <td>If a built-in is significantly shorter or doesn't reach the wall or ceiling as agreed, raise it in writing at the carpentry review stage — before finishing is applied.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-h">What IS a genuine defect</div>
+  <div class="tbl-wrap mb-20">
+    <table>
+      <thead><tr><th>Item</th><th>What qualifies as a defect</th></tr></thead>
+      <tbody>
+        <tr><td>Floor tiles</td><td>Any hollow tile, cracked tile body, or tile with edge height difference (lippage) exceeding 1.5mm between adjacent tiles</td></tr>
+        <tr><td>Waterproofing</td><td>Water seeping through to ceiling below, to adjacent walls, or outside the wet area boundary</td></tr>
+        <tr><td>Carpentry</td><td>Doors that won't close flush, gaps at seams exceeding 3mm, drawers that won't run smoothly after adjustment</td></tr>
+        <tr><td>Electrical</td><td>Sockets that trip, flicker, or are not live at handover</td></tr>
+        <tr><td>Paint (final coat)</td><td>Visible bare patches, peeling, or incorrect colour after final coat is completed</td></tr>
+        <tr><td>Silicon</td><td>Gaps or missing sections, pulling away from surface, mould within warranty period</td></tr>
+        <tr><td>Windows (if changed)</td><td>Frame gaps where wall was not made good after old frame removal, visible gaps to outside</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box mb-20">
+    <div class="box-title">When windows are changed — check this</div>
+    <ul class="box-items">
+      <li>When an existing window frame is removed and a new one installed, the surrounding wall area often needs to be plastered or made good</li>
+      <li>This wall-making-good work is not automatically included — confirm with your ID before window works begin</li>
+      <li>Gaps between the new frame and the wall, or uneven plaster around the new window, should be attended to before painting</li>
+    </ul>
+  </div>
+
+  <div class="golden">
+    <div class="rule-label">The golden rule</div>
+    <p>Judge workmanship standing at normal distance under room lighting — not with a torch pressed against the surface.</p>
+    <p>A torch will reveal imperfections on any wall, in any home, anywhere in the world. The right question is: <strong>does it look right when I'm living in it?</strong> That is the standard your ID is held to.</p>
+  </div>
+
+  <div class="sub-h">Warranty to expect from your ID</div>
+  <div class="two-col">
+    <div style="background:var(--sage-light);border:1px solid var(--line);border-radius:4px;padding:18px;">
+      <div style="font-size:26px;font-weight:700;color:var(--sage);font-family:'DM Serif Display',serif;">24 months</div>
+      <div style="font-size:14px;color:var(--body);margin-top:6px;">Workmanship warranty — covers defects in construction and installation quality</div>
+    </div>
+    <div style="background:var(--sage-light);border:1px solid var(--line);border-radius:4px;padding:18px;">
+      <div style="font-size:26px;font-weight:700;color:var(--sage);font-family:'DM Serif Display',serif;">12 months</div>
+      <div style="font-size:14px;color:var(--body);margin-top:6px;">Waterproofing warranty — applies to all hacked wet areas that have been re-waterproofed</div>
+    </div>
+  </div>
+  <p class="text-muted mt-8">Warranty only takes effect after all payments are settled and the handover certificate is signed. Natural wear and tear, misuse, and modifications by third parties are excluded.</p>
+</section>
+
+<!-- ═══ S05 WHAT ADDS COST ════════════════════════════════ -->
+<section id="s05">
+  <div class="sec-label">05</div>
+  <h2 class="sec-title serif">What Adds Cost</h2>
+  <div class="sec-rule"></div>
+  <p class="sec-desc">These are the most common reasons renovation costs go beyond the initial quote. Most are design upgrades — which is fine, as long as you know they're coming.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>What triggers it</th><th>Why the cost goes up</th><th>Rough impact</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Upgrading from acrylic/laminate doors to glass doors</td>
+          <td>Tempered glass fabrication, aluminium framing, and installation are more labour-intensive than standard laminate casement doors</td>
+          <td><span class="impact">+$300–$800/door set</span></td>
+        </tr>
+        <tr>
+          <td>Adding false ceiling with features</td>
+          <td>Each feature — cove lighting, layered bulkheads, curves, stepped levels — adds material and labour. A flat false ceiling is cheapest; decorative features compound quickly.</td>
+          <td><span class="impact">+$800–$3,000/feature</span></td>
+        </tr>
+        <tr>
+          <td>Premium countertop material</td>
+          <td>Sintered stone and natural stone cost significantly more than laminate. Thicker profiles, larger slabs, and complex edge profiles add further.</td>
+          <td><span class="impact">2–4× laminate cost</span></td>
+        </tr>
+        <tr>
+          <td>Feature wall (laminate, stone, or wallpaper)</td>
+          <td>Full-height feature walls are large in area and require clean, flush backing. Material and labour both contribute.</td>
+          <td><span class="impact">$1,500–$5,000 depending on material</span></td>
+        </tr>
+        <tr>
+          <td>Tile selection above standard allowance</td>
+          <td>Standard tile budgets (typically up to $3.50/psf) cover a wide range. Imported tiles, large-format slabs, and textured tiles cost more per psf and have higher waste factors.</td>
+          <td><span class="impact">Varies — can double tiling cost</span></td>
+        </tr>
+        <tr>
+          <td>Large-format floor tiles (600×1200mm or larger)</td>
+          <td>Requires a more level screed, more cuts per row, and longer laying time. More material is wasted per cut piece.</td>
+          <td><span class="impact">+30–50% vs 600×600mm</span></td>
+        </tr>
+        <tr>
+          <td>Adding display cabinets, dry pantry, or study desk</td>
+          <td>Every additional carpentry item adds to fabrication, delivery, and installation cost. Aluminium system cabinets (e.g. pole systems) are priced differently from standard wood-based carpentry.</td>
+          <td><span class="impact">$500–$3,000 per unit</span></td>
+        </tr>
+        <tr>
+          <td>Concealed works where exposed was originally quoted</td>
+          <td>Concealing electrical or plumbing works requires additional hacking, conduit, and plastering. If the original quote assumed exposed, concealing is a variation order.</td>
+          <td><span class="impact">Quoted as additional VO</span></td>
+        </tr>
+        <tr>
+          <td>Double-glazed windows vs standard aluminium</td>
+          <td>Double glazing significantly reduces noise and heat — but the glass cost is much higher. Common upgrade for flats facing busy roads or MRT lines.</td>
+          <td><span class="impact">~2× standard window cost</span></td>
+        </tr>
+        <tr>
+          <td>Design changes after carpentry fabrication begins</td>
+          <td>Once fabrication starts, cut materials cannot be reused. Changes at this stage mean new material, new labour, and possible delay to delivery timeline.</td>
+          <td><span class="impact">High — material cost may not be recoverable</span></td>
+        </tr>
+        <tr>
+          <td>Any item not stated in the original contract</td>
+          <td>Anything added during renovation that was not in the signed contract is a Variation Order (VO) and will be charged separately at the time it is agreed</td>
+          <td><span class="impact">Priced per VO</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ S06 DIMENSIONS ════════════════════════════════════ -->
+<section id="s06">
+  <div class="sec-label">06</div>
+  <h2 class="sec-title serif">Dimensions to Know</h2>
+  <div class="sec-rule"></div>
+  <p class="sec-desc">Measure your flat's doorways, corridor turns, and lift car before ordering anything large. These standard dimensions help you plan — always confirm exact cutout specs with your appliance brand before carpentry drawings are finalised.</p>
+
+  <div class="sub-h">TV size &amp; viewing distance</div>
+  <p class="mb-16" style="font-size:14px;color:var(--body);">For 4K screens, a good rule of thumb is a viewing distance of approximately 1 to 1.5× the screen diagonal. Mount the centre of the screen at seated eye level — roughly 100–110cm from the floor.</p>
+  <div class="tv-grid mb-8">
+    <div class="tv-card">
+      <div class="tv-size serif">55"</div>
+      <div class="tv-dist"><strong>1.4 – 2.0m</strong>ideal viewing distance</div>
+    </div>
+    <div class="tv-card">
+      <div class="tv-size serif">65"</div>
+      <div class="tv-dist"><strong>1.6 – 2.4m</strong>ideal viewing distance</div>
+    </div>
+    <div class="tv-card">
+      <div class="tv-size serif">75"</div>
+      <div class="tv-dist"><strong>1.9 – 2.8m</strong>ideal viewing distance</div>
+    </div>
+    <div class="tv-card">
+      <div class="tv-size serif">85"</div>
+      <div class="tv-dist"><strong>2.2 – 3.2m</strong>ideal viewing distance</div>
+    </div>
+  </div>
+  <p class="text-muted mb-24">Size your TV console to at least ⅔ the width of the TV for visual balance. Confirm TV point, cable point, and fan point positions before electrical works begin.</p>
+
+  <div class="sub-h">Appliances</div>
+  <div class="tbl-wrap mb-24">
+    <table>
+      <thead><tr><th>Appliance</th><th>Standard footprint</th><th>Key note</th></tr></thead>
+      <tbody>
+        <tr><td>Washing machine (front-load)</td><td><span class="val">600 × 600mm</span></td><td>Top-load varies — confirm before carpentry is drawn</td></tr>
+        <tr><td>Dryer (condenser)</td><td><span class="val">600 × 600mm</span></td><td>Condenser needs no wall vent. Vented type needs wall penetration.</td></tr>
+        <tr><td>Dishwasher (built-in)</td><td><span class="val">600 × 600mm</span></td><td>Needs cold water inlet + waste outlet under counter — plan plumbing point</td></tr>
+        <tr><td>Fridge (2-door)</td><td><span class="val">700–800 × 700mm</span></td><td>Allow 50mm clearance on sides for ventilation. Measure height including hinge clearance.</td></tr>
+        <tr><td>French door / side-by-side fridge</td><td><span class="val">900–1,000 × 750mm</span></td><td>Check door swing radius against island or adjacent wall</td></tr>
+        <tr><td>Built-in oven</td><td><span class="val">60cm W, cabinet opening H: 565mm</span></td><td>Get exact cutout spec from your chosen brand before cabinet is drawn</td></tr>
+        <tr><td>Hob (2-burner)</td><td><span class="val">700–750mm W</span></td><td>Hood should match hob width or wider. Min 750mm clearance between hob and hood.</td></tr>
+        <tr><td>Hob (3-burner / wok burner)</td><td><span class="val">750–900mm W</span></td><td>Wok burner adds height — check hood clearance and ventilation capacity</td></tr>
+        <tr><td>Storage water heater (30L)</td><td><span class="val">~450mm diameter</span></td><td>Wall-mounted. Position at minimum 1.5m height for adequate water pressure.</td></tr>
+        <tr><td>Instant water heater</td><td><span class="val">200–300mm W</span></td><td>Requires a dedicated 25-amp electrical point — plan this with your ID</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-h">Furniture</div>
+  <div class="tbl-wrap mb-24">
+    <table>
+      <thead><tr><th>Item</th><th>Size</th><th>Planning note</th></tr></thead>
+      <tbody>
+        <tr><td>Single mattress</td><td><span class="val">915 × 1,900mm</span></td><td>Min room width to move comfortably: 2.2m with bed in</td></tr>
+        <tr><td>Super single mattress</td><td><span class="val">1,070 × 1,900mm</span></td><td>Most common for Singapore children's rooms and guest rooms</td></tr>
+        <tr><td>Queen mattress</td><td><span class="val">1,525 × 1,900mm</span></td><td>Min room width with 2 bedside tables: 3.2m</td></tr>
+        <tr><td>King mattress</td><td><span class="val">1,830 × 1,900mm</span></td><td>Recommended min room width: 3.8m</td></tr>
+        <tr><td>3-seater sofa</td><td><span class="val">~2,000–2,200mm W</span></td><td>Measure diagonal corner-to-corner for lift and staircase delivery</td></tr>
+        <tr><td>Dining table (4-person)</td><td><span class="val">1,200 × 800mm</span></td><td>Allow min 900mm clearance on all sides for chairs and movement</td></tr>
+        <tr><td>Dining table (6-person)</td><td><span class="val">1,600 × 900mm</span></td><td>Add ~500mm per end if you want head chairs at the table</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-h">Standard carpentry dimensions</div>
+  <div class="tbl-wrap mb-24">
+    <table>
+      <thead><tr><th>Item</th><th>Standard</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Kitchen base cabinet height</td><td><span class="val">880 – 900mm</span></td><td>Includes countertop. A 50mm mortar base is constructed under the cabinet base.</td></tr>
+        <tr><td>Kitchen base cabinet depth</td><td><span class="val">600mm</span></td><td>Standard counter depth. Island can be deeper if space allows.</td></tr>
+        <tr><td>Kitchen wall cabinet depth</td><td><span class="val">300 – 350mm</span></td><td>Typically mounted at ~1,500mm from floor to cabinet base</td></tr>
+        <tr><td>Island / breakfast counter height</td><td><span class="val">880–900mm (counter) or 1,050mm (bar)</span></td><td>1,050mm bar height requires bar stools with footrests</td></tr>
+        <tr><td>Wardrobe depth (external)</td><td><span class="val">~600mm</span></td><td>Internal usable depth is ~545mm — enough for standard shirt hangers</td></tr>
+        <tr><td>Wardrobe depth (sliding door)</td><td><span class="val">620 – 650mm external</span></td><td>Sliding door track takes some of the internal space; confirm hanger clearance</td></tr>
+        <tr><td>Shoe cabinet shelf depth</td><td><span class="val">300 – 320mm</span></td><td>US size 10+ (Men's) shoes are ~295mm long. For larger sizes plan 340–350mm depth.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box mb-24">
+    <div class="box-title">Shoe cabinet planning — a rough guide</div>
+    <ul class="box-items">
+      <li>Men's US 8–10 shoes: ~275–295mm length. Women's US 6–8: ~240–265mm.</li>
+      <li>Standard shelf holds 2 pairs side by side at roughly 180–200mm width each</li>
+      <li>Plan a minimum of 2 shelves per daily-use person for rotation</li>
+      <li>Add 1–2 shelves at 130–150mm clear height for heels or boots</li>
+      <li>A 5.5ft shoe cabinet with 5 shelves holds approximately 10–14 pairs depending on shoe size</li>
+    </ul>
+  </div>
+
+  <div class="sub-h">Tile sizes &amp; waste</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Format</th><th>Common use</th><th>Waste to order</th></tr></thead>
+      <tbody>
+        <tr><td><span class="val">300 × 600mm</span></td><td>Bathroom wall tiles — most common</td><td>+8–10%</td></tr>
+        <tr><td><span class="val">600 × 600mm</span></td><td>Floor tiles — living, bedroom, kitchen</td><td>+8–10%</td></tr>
+        <tr><td><span class="val">600 × 1,200mm</span></td><td>Large-format floor or feature wall</td><td>+15–20%</td></tr>
+        <tr><td><span class="val">800 × 1,600mm+</span></td><td>Premium slab — fewer joints, high-end look</td><td>+20%</td></tr>
+        <tr><td>Diagonal lay (any size)</td><td>Feature effect — adds laying time</td><td>+15%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-muted mt-8">Standard tile allowance is typically up to $3.50/psf. Tiles above this price point are charged at the difference per psf. Order tiles from the same batch where possible — different production runs can vary in shade.</p>
+</section>
+
+<!-- ═══ S07 FURNITURE & APPLIANCES ══════════════════════ -->
+<section id="s07">
+  <div class="sec-label">07</div>
+  <h2 class="sec-title serif">Furniture &amp; Appliances</h2>
+  <div class="sec-rule"></div>
+  <p class="sec-desc">These decisions feel like they can wait — but they can't. Appliances affect carpentry drawings. Furniture layout affects where your electrical points go. Decide early.</p>
+
+  <div class="info-box mb-24">
+    <div class="box-title">Decide in this order</div>
+    <ul class="box-items">
+      <li><strong>1. Appliance brands and models</strong> — exact cutout dimensions must be confirmed before cabinet drawings are finalised</li>
+      <li><strong>2. Built-in vs loose furniture scope</strong> — determines how many electrical points are needed and where</li>
+      <li><strong>3. Order appliances with long lead times</strong> — imported or built-in appliances can take 6–10 weeks. A delay here stalls carpentry.</li>
+      <li><strong>4. Loose furniture layout</strong> — confirm before electrical concealing works begin, so TV points, fan points, and socket positions are correct</li>
+      <li><strong>5. Measure lift car and doorways</strong> — before ordering any large furniture or appliance for delivery</li>
+    </ul>
+  </div>
+
+  <div class="sub-h">Air-conditioning &amp; lighting — plan with your ID</div>
+  <div class="two-col">
+    <div class="info-box" style="margin-bottom:0">
+      <div class="box-title">Air-conditioning</div>
+      <ul class="box-items">
+        <li>Confirm the number of indoor units, brand, and system type before works begin — your ID will coordinate the trunking and DB point allocation</li>
+        <li>System 4 (4 indoor units, 1 compressor) is standard for most 4–5 room HDB flats</li>
+        <li>If you plan a false ceiling, the condenser pipe routing needs to be decided before ceiling boards go up</li>
+        <li>Include an access panel in false ceiling design for future servicing — your ID will advise on placement</li>
+      </ul>
+    </div>
+    <div class="info-box" style="margin-bottom:0">
+      <div class="box-title">Lighting</div>
+      <ul class="box-items">
+        <li>Plan your lighting scheme with your ID — recessed downlights, pendant, cove, track, and strip lights all have different electrical requirements</li>
+        <li>Warm white (2,700–3,000K) suits bedrooms and living areas. Cooler white (4,000K) works better in kitchens and study rooms.</li>
+        <li>Decide pendant light positions only after your dining table size is confirmed — position is tied to table centre</li>
+        <li>Dimmable circuits can be added where ambience matters — discuss this when confirming electrical points</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONSULT ═══════════════════════════════════════════ -->
+<div class="consult" id="consult">
+  <div class="consult-inner">
+    <div>
+      <div class="eyebrow" style="margin-bottom:14px;">Free · No obligation · No quotation</div>
+      <h3 class="serif">Not sure where to start?</h3>
+      <p>Kens offers a free 45-minute walkthrough — Zoom or in person — to go through your timeline, help you think through your layout, flag what to watch for, and answer questions. No pitch, no quote. Just practical advice from someone who's been through this with hundreds of homeowners.</p>
+      <a href="#" class="btn btn-primary" style="font-size:15px;">Book the free walkthrough</a>
+    </div>
+    <div class="consult-badge">
+      <span class="badge-big">45</span>
+      <span style="font-size:16px;font-weight:600;color:var(--brass);display:block;line-height:1;margin-top:2px;">min</span>
+      <span class="badge-sub">Zoom or<br>in-person<br>your choice</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="footer-logo">The Keys Handbook <span>· Lime3</span></div>
+  <p>A free resource for Singapore homeowners · lime3.sg</p>
+</footer>
+
+</body>
+</html>
