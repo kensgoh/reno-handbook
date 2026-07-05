@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Renovation Guide — Lime3</title>
+<title>Renovation Guide — by Kens, Lime3</title>
+<meta name="description" content="A free, practical renovation guide for Singapore homeowners — BTO & resale. Timelines, costs, what's normal vs a defect, and dimensions to know. By Kens from Lime3.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+<!-- Open Graph — makes shared links show a rich preview in WhatsApp/Telegram/FB -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Renovation Guide — free, practical, for SG homeowners">
+<meta property="og:description" content="BTO & resale: timelines, real costs, what's normal vs a defect, dimensions to know. Free guide by Kens from Lime3.">
+<meta property="og:url" content="https://kensgoh.github.io/reno-handbook/">
+<meta property="og:image" content="https://kensgoh.github.io/reno-handbook/images/hero-living.webp">
+<meta name="twitter:card" content="summary_large_image">
+<!-- ANALYTICS: create a free account at goatcounter.com, then uncomment and replace YOURCODE -->
+<!-- <script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -438,6 +449,65 @@ footer a{color:var(--brass);text-decoration:none;}
 @media(max-width:420px){.g-pair{grid-template-columns:1fr;}}
 .g-quad{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;}
 
+/* ── IMAGE UTILITIES ─────────────────────────────── */
+.g-img-tall{aspect-ratio:3/4;}
+.pos-top{object-position:center top;}
+.pos-bottom{object-position:center bottom;}
+.g-img{cursor:zoom-in;}
+
+/* ── STICKY PILLS (S08) ──────────────────────────── */
+.ref-pills{
+  display:flex;gap:6px;flex-wrap:wrap;
+  position:sticky;top:122px;z-index:50;
+  background:var(--paper);
+  padding:10px 0;margin:14px 0 4px;
+  border-bottom:1px solid var(--line);
+}
+
+/* ── LIGHTBOX ────────────────────────────────────── */
+.lightbox{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(20,30,25,.94);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;cursor:zoom-out;
+}
+.lightbox.show{display:flex;}
+.lightbox img{max-width:100%;max-height:90vh;border-radius:8px;object-fit:contain;}
+.lightbox-close{
+  position:absolute;top:16px;right:16px;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:none;color:#fff;
+  font-size:20px;cursor:pointer;
+}
+
+/* ── BACK TO TOP ─────────────────────────────────── */
+.top-btn{
+  position:fixed;bottom:20px;left:20px;z-index:499;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--sage-dark);color:var(--brass);
+  border:1px solid var(--brass);font-size:18px;cursor:pointer;
+  display:none;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(45,84,68,.3);
+}
+.top-btn.show{display:flex;}
+
+/* ── COPY-LINK BUTTON & TOAST ────────────────────── */
+.copy-link{
+  background:none;border:none;cursor:pointer;
+  font-size:13px;color:var(--sage-mid);
+  padding:2px 6px;margin-left:6px;border-radius:4px;
+  vertical-align:middle;
+}
+.copy-link:hover{background:var(--sage-light);}
+.toast{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+  background:var(--sage-dark);color:#fff;
+  font-size:13px;font-weight:600;
+  padding:10px 20px;border-radius:20px;z-index:1001;
+  opacity:0;transition:opacity .25s;pointer-events:none;
+}
+.toast.show{opacity:1;}
+
 /* ── UTILS ───────────────────────────────────────── */
 .mt-4{margin-top:4px;}.mt-8{margin-top:8px;}.mt-12{margin-top:12px;}.mt-16{margin-top:16px;}
 .mb-4{margin-bottom:4px;}.mb-8{margin-bottom:8px;}.mb-12{margin-bottom:12px;}
@@ -473,6 +543,7 @@ footer a{color:var(--brass);text-decoration:none;}
     <div class="hero-actions">
       <a href="#sections" class="btn btn-primary">Jump to my stage →</a>
       <a href="https://wa.me/6589311138" target="_blank" class="btn btn-ghost">Free 45-min consult</a>
+      <button class="btn btn-ghost" onclick="shareGuide()" style="cursor:pointer;">↗ Share</button>
     </div>
   </div>
 </div>
@@ -796,6 +867,10 @@ footer a{color:var(--brass);text-decoration:none;}
               </ul>
             </div>
 
+            <button onclick="printChecklist()" style="display:flex;align-items:center;gap:8px;width:100%;justify-content:center;background:var(--white);border:1.5px solid var(--sage);color:var(--sage);font-size:14px;font-weight:700;padding:12px;border-radius:8px;cursor:pointer;margin:14px 0;font-family:'DM Sans',sans-serif;">
+              🖨 Print the key collection checklist
+            </button>
+
             <div class="kens-says">
               <div class="kens-avatar">K</div>
               <p class="kens-text">"For resale, <strong>those photos are worth more than the hour it takes.</strong> I've quoted more accurately from good photos than from a quick site visit without them."</p>
@@ -930,19 +1005,19 @@ footer a{color:var(--brass);text-decoration:none;}
             <div class="g-quad">
               <div>
                 <img src="images/05-hacking.webp" alt="Hacking in progress" class="g-img g-img-sq" loading="lazy">
-                <p class="g-caption">01 · Hacking &amp; demolition</p>
+                <p class="g-caption">Hacking &amp; demolition</p>
               </div>
               <div>
                 <img src="images/05-post-hacking.webp" alt="Post-hacking bare flat" class="g-img g-img-sq" loading="lazy">
-                <p class="g-caption">02 · Post-hacking</p>
+                <p class="g-caption">Post-hacking — the clean slate</p>
               </div>
               <div>
                 <img src="images/05-tiling.webp" alt="Tiling in progress" class="g-img g-img-sq" loading="lazy">
-                <p class="g-caption">03 · Tiling phase</p>
+                <p class="g-caption">Tiling phase</p>
               </div>
               <div>
                 <img src="images/05-carpentry.webp" alt="Carpentry installation" class="g-img g-img-sq" loading="lazy">
-                <p class="g-caption">07 · Carpentry installation</p>
+                <p class="g-caption">Carpentry installation</p>
               </div>
             </div>
 
@@ -956,6 +1031,80 @@ footer a{color:var(--brass);text-decoration:none;}
               <div>
                 <div class="now-label">Do this now</div>
                 <p class="now-text">Know which phase your renovation is in. Ask your ID what decisions are due before the next phase begins — that's your window.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 09 PERMITS & RULES -->
+    <!-- ════════════════════════════════════ -->
+    <div class="acc" data-stages="keys reno" id="s09">
+      <div class="acc-head" onclick="toggle(this)">
+        <div class="acc-icon">📜</div>
+        <div class="acc-meta">
+          <div class="acc-num">09 · Rules</div>
+          <div class="acc-title">Permits &amp; renovation rules</div>
+          <div class="acc-summary">What needs approval, what can't be done, and when work is allowed.</div>
+        </div>
+        <div class="acc-chevron"><svg viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="acc-content">
+            <p class="intro">Your ID handles the permit paperwork — but knowing the rules yourself helps you understand why certain things can't be done, and why timelines are what they are.</p>
+
+            <div class="sub">When a permit is needed (HDB)</div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Work type</th><th>Permit?</th></tr></thead>
+                <tbody>
+                  <tr><td>Hacking any wall (non-structural)</td><td>Yes — HDB approval before work starts</td></tr>
+                  <tr><td>Removing/replacing floor tiles</td><td>Yes — permit required</td></tr>
+                  <tr><td>Bathroom &amp; kitchen wet works</td><td>Yes — includes waterproofing declaration</td></tr>
+                  <tr><td>Window replacement</td><td>Yes — must use BCA-approved contractor</td></tr>
+                  <tr><td>Painting, carpentry, lighting</td><td>No permit needed</td></tr>
+                  <tr><td>Condo units</td><td>MCST approval instead — submit 2–4 weeks ahead</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="sub">Hard rules — no exceptions</div>
+            <div class="warn-box">
+              <div class="box-title">These cannot be done, by anyone</div>
+              <ul class="box-items">
+                <li>Hacking structural walls, columns, or beams — ever</li>
+                <li>Relocating the toilet bowl position (waste stack is fixed)</li>
+                <li>Extending wet areas beyond the original boundary without approval</li>
+                <li>Window works by a non-BCA-approved contractor</li>
+              </ul>
+            </div>
+
+            <div class="sub">When work is allowed</div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Work type</th><th>Allowed hours</th></tr></thead>
+                <tbody>
+                  <tr><td>General renovation work</td><td>Mon–Sat, 9:00am – 6:00pm</td></tr>
+                  <tr><td>Noisy work (drilling, hacking)</td><td>Weekdays only, 9:00am – 5:00pm</td></tr>
+                  <tr><td>Sundays &amp; public holidays</td><td>No work at all</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="muted mt-8">This is also why "rushing" a renovation has limits — working hours are regulated, not negotiable. HDB also sets a completion timeframe for renovation works; your ID will confirm the current requirement for your block. Rules can change — verify current requirements on the HDB website or with your ID.</p>
+
+            <div class="kens-says">
+              <div class="kens-avatar">K</div>
+              <p class="kens-text">"When your ID says something can't be done — <strong>it's usually the rules, not reluctance.</strong> The waste stack, structural walls, and working hours are fixed for every ID in Singapore."</p>
+            </div>
+
+            <div class="do-now">
+              <span class="now-icon">📜</span>
+              <div>
+                <div class="now-label">Do this now</div>
+                <p class="now-text">Ask your ID which parts of your plan need HDB/MCST approval and when they'll submit. Hacking cannot legally start before approval.</p>
               </div>
             </div>
           </div>
@@ -1154,7 +1303,16 @@ footer a{color:var(--brass);text-decoration:none;}
         <div class="acc-body-inner">
           <div class="acc-content">
 
-            <div class="sub">TV size &amp; viewing distance</div>
+            <div class="ref-pills">
+              <button class="j-btn" style="font-size:12px;padding:6px 12px;" onclick="jumpTo('ref-tv')">TV</button>
+              <button class="j-btn" style="font-size:12px;padding:6px 12px;" onclick="jumpTo('ref-appl')">Appliances</button>
+              <button class="j-btn" style="font-size:12px;padding:6px 12px;" onclick="jumpTo('ref-furn')">Furniture</button>
+              <button class="j-btn" style="font-size:12px;padding:6px 12px;" onclick="jumpTo('ref-carp')">Carpentry</button>
+              <button class="j-btn" style="font-size:12px;padding:6px 12px;" onclick="jumpTo('ref-tiles')">Tiles</button>
+              <button class="j-btn" style="font-size:12px;padding:6px 12px;" onclick="jumpTo('ref-taobao')">Buying online</button>
+            </div>
+
+            <div class="sub" id="ref-tv">TV size &amp; viewing distance</div>
             <p class="muted mb-8">Centre of screen at seated eye level — approx 100–110cm from floor. For 4K: viewing distance = 1 to 1.5× screen diagonal.</p>
             <div class="tv-row">
               <div class="tv-card"><div class="tv-size">55"</div><div class="tv-dims">1,228 × 710mm<strong>1.4 – 2.0m away</strong></div></div>
@@ -1163,7 +1321,7 @@ footer a{color:var(--brass);text-decoration:none;}
               <div class="tv-card"><div class="tv-size">85"</div><div class="tv-dims">1,892 × 1,090mm<strong>2.2 – 3.2m away</strong></div></div>
             </div>
 
-            <div class="sub">Appliances</div>
+            <div class="sub" id="ref-appl">Appliances</div>
             <div class="tbl-wrap">
               <table>
                 <thead><tr><th>Appliance</th><th>Footprint</th><th>Note</th></tr></thead>
@@ -1183,7 +1341,7 @@ footer a{color:var(--brass);text-decoration:none;}
               </table>
             </div>
 
-            <div class="sub">Furniture</div>
+            <div class="sub" id="ref-furn">Furniture</div>
             <div class="tbl-wrap">
               <table>
                 <thead><tr><th>Item</th><th>Size</th><th>Note</th></tr></thead>
@@ -1203,7 +1361,7 @@ footer a{color:var(--brass);text-decoration:none;}
               </table>
             </div>
 
-            <div class="sub">Carpentry standards</div>
+            <div class="sub" id="ref-carp">Carpentry standards</div>
             <div class="tbl-wrap">
               <table>
                 <thead><tr><th>Item</th><th>Standard</th><th>Note</th></tr></thead>
@@ -1230,7 +1388,7 @@ footer a{color:var(--brass);text-decoration:none;}
               </ul>
             </div>
 
-            <div class="sub">Tiles</div>
+            <div class="sub" id="ref-tiles">Tiles</div>
             <div class="tbl-wrap">
               <table>
                 <thead><tr><th>Format</th><th>Common use</th><th>Order extra</th></tr></thead>
@@ -1245,7 +1403,7 @@ footer a{color:var(--brass);text-decoration:none;}
             </div>
             <p class="muted mt-8 mb-12">Order from the same production batch where possible — different batches can vary in shade. Standard tile allowance is typically up to $3.50/psf.</p>
 
-            <div class="sub">Buying sanitary wares online (e.g. Taobao)</div>
+            <div class="sub" id="ref-taobao">Buying sanitary wares online (e.g. Taobao)</div>
             <div class="tbl-wrap">
               <table>
                 <thead><tr><th>Check this</th><th>Why it matters</th></tr></thead>
@@ -1279,6 +1437,31 @@ footer a{color:var(--brass);text-decoration:none;}
 
   </div><!-- /sections -->
 
+  <!-- ABOUT KENS -->
+  <div style="display:flex;gap:16px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;margin:32px 0 0;">
+    <div style="position:relative;width:56px;height:56px;flex-shrink:0;">
+      <img src="images/kens.webp" alt="Kens Goh" style="width:56px;height:56px;border-radius:50%;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div style="display:none;width:56px;height:56px;border-radius:50%;background:var(--brass);align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--sage-dark);font-family:'DM Serif Display',serif;position:absolute;inset:0;">K</div>
+    </div>
+    <div>
+      <p style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;">About this guide</p>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.6;">Put together by <strong style="color:var(--ink);">Kens Goh</strong>, interior designer at Lime3 — built from the questions homeowners actually ask across real BTO and resale projects in Singapore. AI-assisted, personally reviewed.</p>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS: uncomment when you have real client quotes. Never publish fabricated ones.
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0;">
+    <div style="background:var(--sage-light);border-radius:10px;padding:16px;">
+      <p style="font-size:13.5px;font-style:italic;color:var(--ink);line-height:1.6;">"REAL CLIENT QUOTE HERE"</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px;">— 4-rm resale, [Estate]</p>
+    </div>
+    <div style="background:var(--sage-light);border-radius:10px;padding:16px;">
+      <p style="font-size:13.5px;font-style:italic;color:var(--ink);line-height:1.6;">"REAL CLIENT QUOTE HERE"</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px;">— 5-rm BTO, [Estate]</p>
+    </div>
+  </div>
+  -->
+
   <!-- CONSULT STRIP -->
   <div style="background:var(--sage-dark);border-radius:12px;padding:28px 24px;margin:32px 0;text-align:center;position:relative;overflow:hidden;">
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(196,149,90,.15),transparent);pointer-events:none;"></div>
@@ -1307,18 +1490,35 @@ footer a{color:var(--brass);text-decoration:none;}
   </p>
 </footer>
 
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" aria-label="Close">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<div class="toast" id="toast">Link copied</div>
+
 <script>
-// ── ACCORDION ─────────────────────────────────────────────────────────────
+// ── ACCORDION (with overflow handling for sticky pills) ───────────────────
+function openAcc(acc){
+  acc.classList.add('open');
+  const inner = acc.querySelector('.acc-body-inner');
+  setTimeout(()=>{ if(acc.classList.contains('open')) inner.style.overflow='visible'; }, 330);
+}
+function closeAcc(acc){
+  const inner = acc.querySelector('.acc-body-inner');
+  inner.style.overflow='hidden';
+  acc.classList.remove('open');
+}
 function toggle(head) {
   const acc = head.closest('.acc');
-  acc.classList.toggle('open');
+  if (acc.classList.contains('open')) closeAcc(acc); else openAcc(acc);
 }
 
 // ── JOURNEY STAGE ─────────────────────────────────────────────────────────
 const stageMap = {
   planning: ['s01','s02','s08'],
-  keys:     ['s03','s04'],
-  reno:     ['s05','s06','s07'],
+  keys:     ['s03','s04','s09'],
+  reno:     ['s05','s09','s06','s07'],
   finishing:['s06','s07']
 };
 
@@ -1327,16 +1527,106 @@ function setStage(btn, stage) {
   btn.classList.add('active');
   const targets = stageMap[stage] || [];
   document.querySelectorAll('.acc').forEach(acc => {
-    if (targets.includes(acc.id)) {
-      acc.classList.add('open');
-    } else {
-      acc.classList.remove('open');
-    }
+    if (targets.includes(acc.id)) openAcc(acc); else closeAcc(acc);
   });
   if (targets.length) {
     const first = document.getElementById(targets[0]);
     if (first) setTimeout(() => first.scrollIntoView({behavior:'smooth', block:'start'}), 100);
   }
+}
+
+// ── SHARE ─────────────────────────────────────────────────────────────────
+function shareGuide() {
+  const url = 'https://kensgoh.github.io/reno-handbook/';
+  const text = 'Free renovation guide for SG homeowners — timelines, real costs, what\'s normal vs a defect. Worth a read before your reno:';
+  if (navigator.share) {
+    navigator.share({title:'Renovation Guide', text:text, url:url}).catch(()=>{});
+  } else {
+    window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank');
+  }
+}
+
+// ── JUMP (within open accordion) ──────────────────────────────────────────
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ── PRINT CHECKLIST ───────────────────────────────────────────────────────
+function printChecklist() {
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>Key Collection Checklist</title>
+  <style>
+    body{font-family:Arial,sans-serif;max-width:640px;margin:24px auto;padding:0 20px;color:#222;}
+    h1{font-size:20px;border-bottom:3px solid #C4955A;padding-bottom:8px;}
+    h2{font-size:14px;color:#4E7D68;margin-top:22px;text-transform:uppercase;letter-spacing:.05em;}
+    li{margin:7px 0;font-size:14px;list-style:none;padding-left:26px;position:relative;}
+    li::before{content:'☐';position:absolute;left:0;font-size:16px;}
+    .foot{margin-top:28px;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:10px;}
+  </style></head><body>
+  <h1>Key Collection Day Checklist</h1>
+  <h2>Bring along</h2>
+  <ul><li>Measuring tape (5m)</li><li>Phone, fully charged</li><li>HDB defect form (BTO — download from HDB portal first)</li><li>Your ID, if available</li></ul>
+  <h2>BTO — check &amp; report via HDB portal</h2>
+  <ul><li>Cracks in walls or floor tiles</li><li>Open and close every door and window</li><li>Water flow at all taps and showers</li><li>Flush all toilets, check for leaks under</li><li>Test every electrical point</li><li>Tap floor tiles for hollow sound</li><li>Ceiling — water stains or damp patches</li></ul>
+  <h2>Resale — photograph everything</h2>
+  <ul><li>Every room, all 4 corners</li><li>All floor tiles (close-up + wide)</li><li>Both toilets — floor, walls, ceiling</li><li>Kitchen — all walls incl. behind fridge space</li><li>All plumbing points &amp; pipe condition</li><li>DB box, full open shot</li><li>Window frames &amp; sills</li><li>Compare layout against original HDB floor plan</li></ul>
+  <h2>Same day</h2>
+  <ul><li>Set up SP Group utilities account</li><li>BTO: submit defect report to HDB portal</li><li>Send photos to your ID</li></ul>
+  <p class="foot">From the Renovation Guide by Kens · Lime3 — kensgoh.github.io/reno-handbook</p>
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`);
+  w.document.close();
+}
+
+// ── DEEP LINKS: #s06 in URL auto-opens that section ───────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const hash = location.hash.replace('#','');
+  if (hash && document.getElementById(hash) && document.getElementById(hash).classList.contains('acc')) {
+    const acc = document.getElementById(hash);
+    openAcc(acc);
+    setTimeout(() => acc.scrollIntoView({behavior:'smooth', block:'start'}), 200);
+  }
+
+  // Inject a copy-link button into every accordion header
+  document.querySelectorAll('.acc').forEach(acc => {
+    const title = acc.querySelector('.acc-title');
+    if (!title) return;
+    const btn = document.createElement('button');
+    btn.className = 'copy-link';
+    btn.innerHTML = '🔗';
+    btn.title = 'Copy link to this section';
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const url = 'https://kensgoh.github.io/reno-handbook/#' + acc.id;
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
+        .then(showToast)
+        .catch(() => { prompt('Copy this link:', url); });
+    };
+    title.appendChild(btn);
+  });
+
+  // Lightbox: tap any guide image to view full size
+  document.querySelectorAll('.g-img').forEach(img => {
+    img.addEventListener('click', () => {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('show');
+    });
+  });
+
+  // Back-to-top visibility
+  window.addEventListener('scroll', () => {
+    document.getElementById('topBtn').classList.toggle('show', window.scrollY > 600);
+  }, {passive:true});
+});
+
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('show'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+function showToast(){
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
 }
 
 // ── BTO / RESALE TOGGLE ───────────────────────────────────────────────────
