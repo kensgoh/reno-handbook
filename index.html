@@ -39,6 +39,8 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+html,body{overflow-x:hidden;max-width:100%;}
+img{max-width:100%;}
 
 body{
   font-family:'DM Sans',sans-serif;
@@ -241,7 +243,22 @@ nav{
 .card ul li::before{content:'·';position:absolute;left:0;color:var(--sage-mid);font-weight:700;}
 
 /* ── TABLES ──────────────────────────────────────── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:8px;border-radius:6px;border:1px solid var(--line);}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:8px;border-radius:6px;border:1px solid var(--line);position:relative;}
+@media(max-width:560px){
+  .tbl-wrap table{min-width:520px;}
+  .tbl-wrap{
+    background:
+      linear-gradient(to right, var(--white) 30%, transparent),
+      linear-gradient(to left, var(--white) 30%, transparent) 100% 0,
+      radial-gradient(farthest-side at 0 50%, rgba(45,84,68,.18), transparent),
+      radial-gradient(farthest-side at 100% 50%, rgba(45,84,68,.18), transparent) 100% 0;
+    background-repeat:no-repeat;
+    background-size:40px 100%, 40px 100%, 14px 100%, 14px 100%;
+    background-attachment:local, local, scroll, scroll;
+  }
+  thead th{font-size:11.5px;padding:9px 10px;}
+  tbody td{font-size:13px;padding:9px 10px;}
+}
 table{width:100%;border-collapse:collapse;font-size:13.5px;}
 thead th{background:var(--sage);color:var(--white);text-align:left;font-weight:600;font-size:12px;padding:10px 12px;}
 thead th:first-child{border-radius:0;}
@@ -380,6 +397,7 @@ tbody td:first-child{font-weight:600;color:var(--ink);}
 
 /* ── WARRANTY CARDS ──────────────────────────────── */
 .warranty-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:400px){.warranty-row{grid-template-columns:1fr;}}
 .w-card{background:var(--sage-light);border:1px solid var(--line);border-radius:8px;padding:16px;}
 .w-num{font-size:26px;font-weight:700;color:var(--sage);font-family:'DM Serif Display',serif;}
 .w-text{font-size:13px;color:var(--body);margin-top:4px;line-height:1.4;}
@@ -439,7 +457,7 @@ footer a{color:var(--brass);text-decoration:none;}
   border:1px solid var(--line);
   background:var(--sage-light);
 }
-.g-img-wide{aspect-ratio:16/7;}
+.g-img-wide{aspect-ratio:16/9;}
 .g-img-sq{aspect-ratio:4/3;}
 .g-caption{
   font-size:11px;color:var(--muted);
@@ -681,7 +699,7 @@ footer a{color:var(--brass);text-decoration:none;}
             </div>
 
             <div class="kens-says">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"The clearer you are on how you actually live in the space, <strong>the easier every decision becomes</strong> — from layout to material selections. That clarity is worth spending time on."</p>
             </div>
 
@@ -802,7 +820,7 @@ footer a{color:var(--brass);text-decoration:none;}
             </div>
 
             <div class="kens-says">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"Get 3–5 quotes. The cheapest quote isn't always the cheapest renovation. <strong>What's not in the scope is what gets you later.</strong>"</p>
             </div>
 
@@ -813,6 +831,8 @@ footer a{color:var(--brass);text-decoration:none;}
                 <p class="now-text">Set your total budget including contingency. Then list your must-haves — budget those first before anything decorative.</p>
               </div>
             </div>
+
+            <p style="font-size:13px;color:var(--muted);margin-top:12px;text-align:center;">Already have quotes and not sure how to compare them? <a href="https://wa.me/6589311138?text=Hi%20Kens%2C%20I%20have%20some%20quotes%20I%27d%20like%20a%20second%20opinion%20on." target="_blank" style="color:var(--sage);font-weight:600;text-decoration:none;border-bottom:1px solid var(--sage-mid);">Ask Kens — it's free</a></p>
           </div>
         </div>
       </div>
@@ -872,7 +892,7 @@ footer a{color:var(--brass);text-decoration:none;}
             </button>
 
             <div class="kens-says">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"For resale, <strong>those photos are worth more than the hour it takes.</strong> I've quoted more accurately from good photos than from a quick site visit without them."</p>
             </div>
 
@@ -946,7 +966,7 @@ footer a{color:var(--brass);text-decoration:none;}
             </div>
 
             <div class="kens-says mt-12">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"8–12 weeks is the estimate. Give yourself 14. <strong>Material delays, authority approvals, and small scope changes are normal</strong> — they're outside the ID's control."</p>
             </div>
 
@@ -1022,7 +1042,7 @@ footer a{color:var(--brass);text-decoration:none;}
             </div>
 
             <div class="kens-says">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"The most expensive changes are the ones made <strong>after fabrication starts.</strong> Spend the time upfront on the 3D and drawings — it saves money and frustration later."</p>
             </div>
 
@@ -1096,7 +1116,7 @@ footer a{color:var(--brass);text-decoration:none;}
             <p class="muted mt-8">This is also why "rushing" a renovation has limits — working hours are regulated, not negotiable. HDB also sets a completion timeframe for renovation works; your ID will confirm the current requirement for your block. Rules can change — verify current requirements on the HDB website or with your ID.</p>
 
             <div class="kens-says">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"When your ID says something can't be done — <strong>it's usually the rules, not reluctance.</strong> The waste stack, structural walls, and working hours are fixed for every ID in Singapore."</p>
             </div>
 
@@ -1207,7 +1227,7 @@ footer a{color:var(--brass);text-decoration:none;}
             <p class="muted mt-8">Warranty takes effect after all payments are settled and the handover certificate is signed.</p>
 
             <div class="kens-says">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"If something concerns you — <strong>photograph it and WhatsApp your ID.</strong> In writing is always better. That's how both sides stay protected."</p>
             </div>
 
@@ -1218,6 +1238,8 @@ footer a{color:var(--brass);text-decoration:none;}
                 <p class="now-text">At handover, walk through with your ID. List any items to attend to in writing and agree on a timeline to close them. Prompt sign-off closes the project cleanly for both sides.</p>
               </div>
             </div>
+
+            <p style="font-size:13px;color:var(--muted);margin-top:12px;text-align:center;">Unsure whether something in your reno is normal or worth raising? <a href="https://wa.me/6589311138?text=Hi%20Kens%2C%20I%20have%20a%20question%20about%20something%20in%20my%20renovation." target="_blank" style="color:var(--sage);font-weight:600;text-decoration:none;border-bottom:1px solid var(--sage-mid);">Send Kens a photo — no strings</a></p>
           </div>
         </div>
       </div>
@@ -1270,7 +1292,7 @@ footer a{color:var(--brass);text-decoration:none;}
             </div>
 
             <div class="kens-says">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"VOs are normal. <strong>The surprise ones aren't.</strong> Ask your ID upfront what typically gets added for a project like yours — and price for it."</p>
             </div>
 
@@ -1419,7 +1441,7 @@ footer a{color:var(--brass);text-decoration:none;}
             </div>
 
             <div class="kens-says">
-              <div class="kens-avatar">K</div>
+              <div class="kens-avatar" style="overflow:hidden;padding:0;"><img src="images/kens.webp" alt="Kens" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='K';this.parentElement.style.overflow='';"></div>
               <p class="kens-text">"Bring these reference numbers to your first ID meeting and you'll cover more ground in less time. <strong>Knowing your TV size, bed size, and appliance list upfront makes every drawing session more productive.</strong>"</p>
             </div>
 
@@ -1439,8 +1461,8 @@ footer a{color:var(--brass);text-decoration:none;}
 
   <!-- ABOUT KENS -->
   <div style="display:flex;gap:16px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;margin:32px 0 0;">
-    <div style="position:relative;width:56px;height:56px;flex-shrink:0;">
-      <img src="images/kens.webp" alt="Kens Goh" style="width:56px;height:56px;border-radius:50%;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div style="position:relative;width:64px;height:64px;flex-shrink:0;">
+      <img src="images/kens.webp" alt="Kens Goh" style="width:64px;height:64px;border-radius:50%;object-fit:cover;display:block;border:2px solid var(--brass);" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
       <div style="display:none;width:56px;height:56px;border-radius:50%;background:var(--brass);align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--sage-dark);font-family:'DM Serif Display',serif;position:absolute;inset:0;">K</div>
     </div>
     <div>
@@ -1581,6 +1603,9 @@ function printChecklist() {
 
 // ── DEEP LINKS: #s06 in URL auto-opens that section ───────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // Sections open by default need overflow:visible for sticky pills to work
+  document.querySelectorAll('.acc.open .acc-body-inner').forEach(el => el.style.overflow = 'visible');
+
   const hash = location.hash.replace('#','');
   if (hash && document.getElementById(hash) && document.getElementById(hash).classList.contains('acc')) {
     const acc = document.getElementById(hash);
